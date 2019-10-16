@@ -1,0 +1,49 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftWebConsole
+  creationTimestamp: null
+  labels:
+    app: nodejs-enricher
+  name: nodejs-enricher
+  selfLink: /apis/build.openshift.io/v1/namespaces/3scale/buildconfigs/nodejs-enricher
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: nodejs-enricher:latest
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    contextDir: /nodejs
+    git:
+      ref: master
+      uri: https://gitlab.consulting.redhat.com/fceresol/3scaleenricherproxy.git
+    sourceSecret:
+      name: gitsecret
+    type: Git
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: nodejs:10
+        namespace: openshift
+    type: Source
+  successfulBuildsHistoryLimit: 5
+  triggers:
+  - imageChange:
+      lastTriggeredImageID: 172.30.1.1:5000/openshift/nodejs@sha256:3cc041334eef8d5853078a0190e46a2998a70ad98320db512968f1de0561705e
+    type: ImageChange
+  - type: ConfigChange
+  - generic:
+      secret: e0d9fe1266bbc8ec
+    type: Generic
+  - github:
+      secret: 50a01bae13cd6f0d
+    type: GitHub
+status:
+  lastVersion: 3
