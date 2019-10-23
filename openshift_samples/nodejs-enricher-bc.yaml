@@ -22,9 +22,7 @@ spec:
     contextDir: /nodejs
     git:
       ref: master
-      uri: https://gitlab.consulting.redhat.com/fceresol/3scaleenricherproxy.git
-    sourceSecret:
-      name: gitsecret
+      uri: https://github.com/fceresol/3ScaleConfigEnricher.git
     type: Git
   strategy:
     sourceStrategy:

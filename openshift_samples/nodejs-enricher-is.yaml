@@ -1,0 +1,15 @@
+kind: ImageStreamList
+apiVersion: v1
+metadata:
+  annotations:
+    description: NodeJS JSON Enricher Image Stream
+  labels:
+    app: nodejs-enricher
+  name: nodejs-enricher
+items:
+- kind: ImageStream
+  apiVersion: v1
+  metadata:
+    name: nodejs-enricher
+    annotations:
+      openshift.io/display-name: nodejs-enricher

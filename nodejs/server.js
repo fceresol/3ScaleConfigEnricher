@@ -82,7 +82,7 @@ app.get('/master/api/proxy/configs/*.json', function (req, res) {
 });
 
 // prototype -- fix it!!!
-app.get('/admin/api/services.json', function (req, res) {
+/*app.get('/admin/api/services.json', function (req, res) {
     let localUrl = req.originalUrl;
 
     let threeScaleUrl = threeScaleConfigUrl + localUrl;
@@ -98,7 +98,7 @@ app.get('/admin/api/services.json', function (req, res) {
 
 
     logger.info('retrieved configuration from 3scale....');
-    call3Scale(function (threeScaleConfig /* threeScaleConfig is passed using callback */) {
+    call3Scale(function (threeScaleConfig /* threeScaleConfig is passed using callback ) {
         logger.info(util.inspect(threeScaleConfig, { depth: null }));
         logger.info('enriching it....');
         let enrichedConfig = enrichServiceJsonConfig(threeScaleConfig);
@@ -133,7 +133,7 @@ app.get('/*', function (req, res) {
     logger.info(util.inspect(enrichedConfig, { depth: null }));
     res.body = enrichedConfig;
     res.statusCode = 200;
-});
+});*/
 
 
 // error handling
