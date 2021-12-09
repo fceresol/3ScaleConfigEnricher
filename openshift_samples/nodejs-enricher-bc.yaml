@@ -25,9 +25,8 @@ spec:
   strategy:
     sourceStrategy:
       from:
-        kind: ImageStreamTag
-        name: ubi8/nodejs-16:latest
-        namespace: openshift
+        kind: DockerImage
+        name: registry.redhat.io/rhel8/nodejs-16-minimal
     type: Source
   successfulBuildsHistoryLimit: 5
 

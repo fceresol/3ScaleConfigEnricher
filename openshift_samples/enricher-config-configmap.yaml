@@ -2,27 +2,11 @@ apiVersion: v1
 data:
   config.json: |-
     {
-        "threeScaleMasterConfigUrl": "https://jqf8a3dt@test-master-3scale.192.168.99.123.nip.io",
         "threeScaleAdminServiceUrl": "https://3scale-admin.3scale.192.168.99.123.nip.io",
         "threeScaleServiceAuthToken": "4ead17e192709148fcb8b0e614b58ea00ac38c909d0c127ea15700f5919e73f7",
-        "serviceConfigs": [
-            { "name":"production",
-                "defaults":
-                {
-                    "claimName": "{{client}}",
-                    "claimType": "liquid"
-                }
-            },
-            {"name":"staging",
-                "defaults":
-                {
-                    "claimName": "{{client}}",
-                    "claimType": "liquid"
-                }}
-            ]
     }
 kind: ConfigMap
 metadata:
-  name: enricher-config
+  name: adminproxy-config
   labels:
-    app: nodejs-enricher
+    app: nodejs-adminproxy

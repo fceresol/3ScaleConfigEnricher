@@ -1,14 +1,14 @@
 "use strict";
 class Logger
 {
-    /*constructor()
+    constructor()
     {
         this._logger = require('logger').createLogger();
         this._logLevel = 'info';
         this._logger.format = function (level, date, message) {
             return [this.getColourLevel(level), ' [', date, '] ', message, '\x1b[0m'].join('');
         };
-    };*/
+    };
 
     isLoggable(level)
     {
@@ -74,7 +74,7 @@ class Logger
         this._logger = require('logger').createLogger();
         this._logLevel = 'info';
         this._logger.format = function (level, date, message) {
-            return [Logger.getColourLevel(level), ' [', date, '] ', message, '\x1b[0m'].join('');
+            return [Logger.getColourLevel(level), ' [', date, '] ', message, Reset].join('');
         };
     };
     
