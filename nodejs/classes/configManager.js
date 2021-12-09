@@ -4,7 +4,7 @@ let Logger = LogManager.Logger;
 class ConfigManager {
 
     constructor(configFilePath, environment) {
-        this.logger = new Logger().getLogger();
+        this.logger = console;
         this._port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
         this._ip = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
         this.logger.info('reading config');

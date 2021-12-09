@@ -2,7 +2,7 @@
 // 3scale Configuration Enricher Proxy
 //4ead17e192709148fcb8b0e614b58ea00ac38c909d0c127ea15700f5919e73f7
 // read the env containing the config file
-var logger = require('logger').createLogger();
+var logger = console; //require('logger').createLogger();
 var configFile = process.env.ENRICHER_CONFIG_FILE || '/enricher/config/config.json';
 var environment = process.env.ENVIRONMENT || 'staging';
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
