@@ -3,17 +3,14 @@ kind: Route
 metadata:
   creationTimestamp: null
   labels:
-    app: nodejs-enricher
-  name: nodejs-enricher
-  selfLink: /apis/route.openshift.io/v1/namespaces/3scale/routes/nodejs-enricher
+    app: nodejs-adminproxy
+  name: nodejs-adminproxy
 spec:
-  host: nodejs-enricher-3scale.192.168.99.123.nip.io
   port:
     targetPort: 8080-8080
   to:
     kind: Service
-    name: nodejs-enricher
+    name: nodejs-adminproxy
     weight: 100
   wildcardPolicy: None
-status:
-  ingress: null
+

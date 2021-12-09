@@ -2,14 +2,14 @@ kind: ImageStreamList
 apiVersion: v1
 metadata:
   annotations:
-    description: NodeJS JSON Enricher Image Stream
+    description: NodeJS JSON 3Scale Admin Proxy image
   labels:
-    app: nodejs-enricher
-  name: nodejs-enricher
+    app: nodejs-adminproxy
+  name: nodejs-adminproxy
 items:
 - kind: ImageStream
   apiVersion: v1
   metadata:
-    name: nodejs-enricher
+    name: nodejs-adminproxy
     annotations:
-      openshift.io/display-name: nodejs-enricher
+      openshift.io/display-name: nodejs-adminproxy

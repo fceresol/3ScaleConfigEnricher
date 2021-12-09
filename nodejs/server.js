@@ -14,8 +14,6 @@ let ServiceConfig = cm.ServiceConfig;
 let lm = require('./classes/LogManager');
 let LogManager = lm.LogManager;
 
-let enricher = require('./modules/enricher');
-let enrichMasterJsonConfig = enricher.enrichMasterJsonConfig;
 
 const util = require('util');
 const http = require('request');
@@ -31,10 +29,7 @@ app.use(morgan('combined'))
 
 let config = new ConfigManager(configFile, environment);
 
-
-logger.info('3Scale master config url:' + config.threeScaleMasterConfigUrl);
 logger.info('3Scale admin config url:' + config.threeScaleAdminServiceUrl);
-
 
 
 function call3Scale(threeScaleUrl, res, callback) {
@@ -56,69 +51,12 @@ function call3Scale(threeScaleUrl, res, callback) {
 
 }
 
-app.get('/master/api/proxy/configs/*.json', function (req, res) {
-    let localUrl = req.originalUrl;
-    let threeScaleUrl = config.threeScaleMasterConfigUrl + localUrl;
-    let splittedURL = localUrl.split('.')[0].split('/');
-    let environment = splittedURL[splittedURL.length - 1];
-    
-    //received a new call 
-    //if pattern matches the config url /master/api/proxy/configs/.*.json
-    //is a config request, enrich it
-    //else simply proxy it
-
-
-    logger.info('retrieved configuration from 3scale....');
-    call3Scale(threeScaleUrl, res, function (threeScaleConfig /* threeScaleConfig is passed using callback */) {
-        logger.info(util.inspect(threeScaleConfig, { depth: null }));
-        logger.info('enriching it....');
-        let enrichedConfig = enrichMasterJsonConfig(threeScaleConfig, config,environment);
-
-        logger.info(util.inspect(enrichedConfig, { depth: null }));
-
-        return res.status(200).json(enrichedConfig);
-    });
-    
-});
-
-// prototype -- fix it!!!
-/*app.get('/admin/api/services.json', function (req, res) {
-    let localUrl = req.originalUrl;
-
-    let threeScaleUrl = threeScaleConfigUrl + localUrl;
-    let threeScaleConfig;
-
-    //received a new call 
-    //if pattern matches the config url /admin/api/services.json
-    //is a services config request, enrich it
-    //else simply proxy it
-
-
-
-
-
-    logger.info('retrieved configuration from 3scale....');
-    call3Scale(function (threeScaleConfig /* threeScaleConfig is passed using callback ) {
-        logger.info(util.inspect(threeScaleConfig, { depth: null }));
-        logger.info('enriching it....');
-        let enrichedConfig = enrichServiceJsonConfig(threeScaleConfig);
-
-        logger.info(util.inspect(enrichedConfig, { depth: null }));
-        res.body = enrichedConfig;
-        res.statusCode = 200;
-
-        return;
-    });
-    res.send();
-});
 app.get('/*', function (req, res) {
 
     let threeScaleConfig;
-    let enrichedConfig;
+    
     //received a new call 
-    //if pattern matches the config url /master/api/proxy/configs/.*.json
-    //is a config request, enrich it
-    //else simply proxy it
+    //proxy it
     http(threeScaleConfigURL + req.originalUrl, { json: true }, (err, res, body) => {
         if (err) { return logger.info(err); }
         threeScaleConfig = body;
@@ -127,13 +65,10 @@ app.get('/*', function (req, res) {
     });
     logger.info('retrieved configuration from 3scale....');
     logger.info(util.inspect(threeScaleConfig, { depth: null }));
-    logger.info('enriching it....');
-    enrichedConfig = enrichJsonConfig(threeScaleConfig);
 
-    logger.info(util.inspect(enrichedConfig, { depth: null }));
-    res.body = enrichedConfig;
+    res.body = threeScaleConfig;
     res.statusCode = 200;
-});*/
+});
 
 
 // error handling
@@ -142,18 +77,13 @@ app.use(function (err, req, res, next) {
     res.status(500).send('Something bad happened!');
 });
 
-// initDb(function(err){
-//   logger.info('Error connecting to Mongo. Message:\n'+err);
-// });
 
 app.listen(config.port, config.ip);
 logger.info('Server running on http://%s:%s', config.ip, config.port);
 
 module.exports = app;
 
-function getServiceConfig(serviceID, tenantID) {
 
-}
 
 
 

@@ -1,19 +1,14 @@
 apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 metadata:
-  annotations:
-    openshift.io/generated-by: OpenShiftWebConsole
-  creationTimestamp: null
-  generation: 1
   labels:
-    app: nodejs-enricher
-  name: nodejs-enricher
-  selfLink: /apis/apps.openshift.io/v1/namespaces/3scale/deploymentconfigs/nodejs-enricher
+    app: nodejs-adminproxy
+  name: nodejs-adminproxy
 spec:
   replicas: 1
   revisionHistoryLimit: 10
   selector:
-    deploymentconfig: nodejs-enricher
+    deploymentconfig: nodejs-adminproxy
   strategy:
     activeDeadlineSeconds: 21600
     resources: {}
@@ -28,8 +23,8 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        app: nodejs-enricher
-        deploymentconfig: nodejs-enricher
+        app: nodejs-adminproxy
+        deploymentconfig: nodejs-adminproxy
     spec:
       containers:
       - env:
@@ -37,7 +32,7 @@ spec:
           value: "0"
         - name: ENRICHER_CONFIG_FILE
           value: /enricher/config/config.json
-        image: 172.30.1.1:5000/3scale/nodejs-enricher@sha256:3b018adc50aeec1735df2e22b9bceda854dd40c8db6fc801f68887a96d133950
+        image: nodejs-adminproxy:latest
         imagePullPolicy: Always
         name: nodejs-enricher
         ports:
@@ -48,33 +43,24 @@ spec:
         terminationMessagePolicy: File
         volumeMounts:
         - mountPath: /enricher/config
-          name: volume-qv08h
+          name: config-volume
       dnsPolicy: ClusterFirst
       restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
       terminationGracePeriodSeconds: 30
       volumes:
       - configMap:
           defaultMode: 420
-          name: enricher-config
-        name: volume-qv08h
+          name: adminproxy-config
+        name: config-volume
   test: false
   triggers:
   - imageChangeParams:
       automatic: true
       containerNames:
-      - nodejs-enricher
+      - nodejs-adminproxy
       from:
         kind: ImageStreamTag
-        name: nodejs-enricher:latest
+        name: nodejs-adminproxy:latest
         namespace: 3scale
     type: ImageChange
   - type: ConfigChange
-status:
-  availableReplicas: 0
-  latestVersion: 0
-  observedGeneration: 0
-  replicas: 0
-  unavailableReplicas: 0
-  updatedReplicas: 0

@@ -1,42 +1,6 @@
 {
-    "threeScaleMasterConfigUrl": "https://jqf8a3dt@test-master-3scale.192.168.99.123.nip.io",
+  
     "threeScaleAdminServiceUrl": "https://3scale-admin.3scale.192.168.99.123.nip.io",
     "threeScaleServiceAuthToken": "4ead17e192709148fcb8b0e614b58ea00ac38c909d0c127ea15700f5919e73f7",
-    "serviceConfigs": [
-        {
-            "name": "production",
-            "defaults": {
-                "claimName": "{{client}}",
-                "claimType": "liquid"
-            },
-            "services": [
-                {
-                    "id": "100c01",
-                    "type": "plain",
-                    "token": "azp"
-                },
-                {
-                    "id": "10002",
-                    "tenant_id": "10001",
-                    "type": "plain",
-                    "token": "aud"
-                }
-            ]
-        },
-        {
-            "name": "staging",
-            "services": [
-                {
-                    "id": "1",
-                    "type": "plain",
-                    "token": "azp"
-                },
-                {
-                    "id": "3",
-                    "type": "plain",
-                    "token": "aud"
-                }
-            ]
-        }
-    ]
+  
 }

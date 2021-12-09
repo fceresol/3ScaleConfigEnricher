@@ -3,9 +3,9 @@ kind: Service
 metadata:
   creationTimestamp: null
   labels:
-    app: nodejs-enricher
-  name: nodejs-enricher
-  selfLink: /api/v1/namespaces/3scale/services/nodejs-enricher
+    app: nodejs-adminproxy
+  name: nodejs-adminproxy
+  selfLink: /api/v1/namespaces/3scale/services/nodejs-adminproxy
 spec:
   ports:
   - name: 8080-8080
@@ -13,8 +13,7 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    app: nodejs-enricher
+    app: nodejs-adminproxy
   sessionAffinity: None
   type: ClusterIP
-status:
-  loadBalancer: {}
+

@@ -4,18 +4,18 @@
   "description": "3Scale APIcast configuration enricher proxy",
   "main": "server.js",
   "dependencies": {
-    "ejs": "^2.7.1",
+    "ejs": "^3.1.6",
     "express": "^4.17.1",
     "logger": "0.0.1",
-    "morgan": "^1.9.1",
+    "morgan": "^1.10.0",
     "object-assign": "^4.1.1",
     "request": "^2.88.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.6.4",
-    "@babel/core": "^7.6.4",
-    "@babel/node": "^7.6.3",
-    "@babel/preset-env": "^7.6.3"
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/node": "^7.16.0",
+    "@babel/preset-env": "^7.16.4"
   },
   "engine": {
     "node": "*",
